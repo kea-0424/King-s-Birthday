@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King's Birthday 3x3 Basketball Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E30613;
+            --secondary-red: #FF4D4D;
+            --white: #FFFFFF;
+            --black: #000000;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --accent-yellow: #FFD700;
+            --accent-blue: #0057B7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section styling */
+        .section {
+            padding: 4rem 0;
+            background-color: var(--light-gray);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(227, 6, 19, 0.8), rgba(227, 6, 19, 0.6)), url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-yellow);
+            color: var(--black);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section title styling */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-yellow);
+            margin: 1rem auto;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-card {
+            text-align: center;
+        }
+
+        .result-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        .result-card p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-yellow);
+        }
+
+        /* Teams Section */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .team-card {
+            text-align: center;
+            border-top: 4px solid var(--primary-red);
+        }
+
+        .team-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Knockout Section */
+        .knockout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .match-card {
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .match-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .team-vs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .team-name {
+            font-weight: 600;
+        }
+
+        .team-score {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .vs {
+            font-weight: bold;
+            margin: 0 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Officials Section */
+        .officials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .official-card {
+            text-align: center;
+        }
+
+        .official-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-red);
+        }
+
+        .official-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .official-card p {
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+
+        /* Tournament Info */
+        .info-card {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-red);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .copyright {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-red);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">King's 3x3</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#teams">Teams</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#knockout">Knockout Stages</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#officials">Officials</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span>☰</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>KING'S BIRTHDAY 3X3 TOURNAMENT</h1>
+            <p>Dear Players, Coaches, Volunteers, Sponsors, and Spectators,
+
+On behalf of the organizing committee, we extend our deepest gratitude to each and every one of you for making the 2025 King's Birthday 3x3 Basketball Tournament (July 19-20) an unforgettable event! Your energy, sportsmanship, and passion for the game truly brought the Margarete Mary Centre to life.
+
+Highlights of the Weekend:
+🏀 Competitive Spirit – The games were intense, showcasing incredible talent and teamwork.
+🎯 3-Point Shootout – A thrilling display of skill that kept everyone on the edge of their seats.
+🤝 Unity & Respect – The moment of silence and camaraderie honored the true spirit of sportsmanship.
+        Let's make it big and better next year</p>
+            <a href="#results" class="btn">View Results</a>
+        </div>
+    </section>
+
+    <!-- Tournament Info Section -->
+    <section class="section">
+        <div class="container">
+            <div class="card info-card">
+                <div class="info-item">
+                    <div class="info-icon">📅</div>
+                    <div>
+                        <h3>Date & Time</h3>
+                        <p>July 19-20, 2024 | 9:00 AM - 16:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🏟️</div>
+                    <div>
+                        <h3>Venue</h3>
+                        <p>Margarete Mary Centre Mine Workers</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">👕</div>
+                    <div>
+                        <h3>Requirements</h3>
+                        <p>Identification copy (Passport/ID/Birth Certificate) | Same color T-shirts per team</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🌟</div>
+                    <div>
+                        <h3>Highlights</h3>
+                        <p>Moment of Silence | 2-Day Tournament | 3-Point Shootout Contest | Food Stalls</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <h3>Contact</h3>
+                        <p>+266-62-659-042 / +266-69-228-744</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section class="section" id="teams">
+        <div class="container">
+            <h2 class="section-title">Participating Teams</h2>
+            <div class="teams-grid">
+                <div class="card team-card">
+                    <h3>Splash Daddies</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>MM2K</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>Blacktop Battle</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>Matoulane</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>VR Hoopers</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>Hawks</h3>
+                    <p>Under 23</p>
+                </div>
+                <div class="card team-card">
+                    <h3>Big 4</h3>
+                    <p>Under 23</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="section" id="results">
+        <div class="container">
+            <h2 class="section-title">Tournament Results</h2>
+            <div class="results-grid">
+                <div class="card result-card">
+                    <div class="result-icon">🥇</div>
+                    <h3>1st Place Team</h3>
+                    <p>Hawks</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🥈</div>
+                    <h3>2nd Place Team</h3>
+                    <p>Matoulane</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🥉</div>
+                    <h3>3rd Place Team</h3>
+                    <p>Big 4</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🔥</div>
+                    <h3>Most Offensive Player</h3>
+                    <p>Thapelo Musa</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🛡️</div>
+                    <h3>Most Defensive Player</h3>
+                    <p>Motlatla</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🏀</div>
+                    <h3>3-Point Contest Winner Round 1</h3>
+                    <p>Thapelo Musa</p>
+                </div>
+                <div class="card result-card">
+                    <div class="result-icon">🏀</div>
+                    <h3>3-Point Contest Winner Round 2</h3>
+                    <p>Bohlale Lephoto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knockout Stages Section -->
+    <section class="section" id="knockout">
+        <div class="container">
+            <h2 class="section-title">Knockout Stages</h2>
+            <div class="knockout-grid">
+                <div class="card match-card">
+                    <h3>Semi-Final 1</h3>
+                    <div class="team-vs">
+                        <span class="team-name">Hawks</span>
+                        <span class="team-score">21</span>
+                    </div>
+                    <div class="vs">vs</div>
+                    <div class="team-vs">
+                        <span class="team-name">Splash Daddies</span>
+                        <span class="team-score">18</span>
+                    </div>
+                </div>
+                <div class="card match-card">
+                    <h3>Semi-Final 2</h3>
+                    <div class="team-vs">
+                        <span class="team-name">Matoulane</span>
+                        <span class="team-score">19</span>
+                    </div>
+                    <div class="vs">vs</div>
+                    <div class="team-vs">
+                        <span class="team-name">Big 4</span>
+                        <span class="team-score">15</span>
+                    </div>
+                </div>
+                <div class="card match-card">
+                    <h3>Third position contest</h3>
+                    <div class="team-vs">
+                        <span class="team-name">Splash Daddies</span>
+                        <span class="team-score">19</span>
+                    </div>
+                    <div class="vs">vs</div>
+                    <div class="team-vs">
+                        <span class="team-name">Big 4</span>
+                        <span class="team-score">15</span>
+                    </div>
+                </div>
+                <div class="card match-card">
+                    <h3>Final</h3>
+                    <div class="team-vs">
+                        <span class="team-name">Hawks</span>
+                        <span class="team-score">21</span>
+                    </div>
+                    <div class="vs">vs</div>
+                    <div class="team-vs">
+                        <span class="team-name">Matoulane</span>
+                        <span class="team-score">17</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Tournament Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0004.jpg" alt="Basketball action">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0008.jpg" alt="Team celebration">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0007.jpg" alt="Player shooting">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0010.jpg" alt="Crowd cheering">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250720-WA0033.jpg" alt="Award ceremony">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250720-WA0048.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0041.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0072.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250720-WA0042.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250725-WA0012.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250719_110133.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250719_120215.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_140737.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_134249.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_134324.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250719_122907.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_134301.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_134400.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250719_104248.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG_20250720_140228.jpg" alt="3-point contest">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20250719-WA0004.jpg" alt="3-point contest">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Officials Section -->
+    <section class="section" id="officials">
+        <div class="container">
+            <h2 class="section-title">Organizers & Officials</h2>
+            <div class="officials-grid">
+                <div class="card official-card">
+                    <img src="images/k4.jpeg" alt="Tournament Director">
+                    <h3>Keabetsoe Kuenene</h3>
+                    <p>Tournament Director</p>
+                </div>
+                <div class="card official-card">
+                    <img src="images/motsamai.jpg" alt="Head Referee">
+                    <h3>Rapelang Motsamai</h3>
+                    <p>Head Referee</p>
+                </div>
+                <div class="card official-card">
+                    <img src="images/nthatisi.jpg" alt="Tournament Coordinator">
+                    <h3>Nthatisi Moremoholo</h3>
+                    <p>Tournament Coordinator</p>
+                </div>
+                <div class="card official-card">
+                    <img src="images/IMG-20250719-WA0008.jpg" alt="Bokamoso Representative">
+                    <h3>Mahlape Sojane</h3>
+                    <p>Bokamoso Representative</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About The Tournament</h2>
+            <div class="card about-content">
+                <p>This tournament was held in celebration of King Letsie III's birthday. It brought together youth from across the country in the spirit of unity, sportsmanship, and pride.</p>
+                <p>The 3x3 basketball format provided fast-paced, exciting games that showcased the incredible talent of young athletes from all regions of the country.</p>
+                <p>Beyond competition, the event served as a platform for cultural exchange and community building, reinforcing the values of teamwork and national unity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#teams">Teams</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#knockout">Knockout</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#officials">Officials</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="copyright">
+                    <p>&copy; 2025 King's Birthday 3x3 Basketball Tournament. Organized by the Ministry of Sports & Youth.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
